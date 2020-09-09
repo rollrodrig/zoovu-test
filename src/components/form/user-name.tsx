@@ -1,4 +1,6 @@
 import React, { FC, useState, ChangeEvent } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { Input } from './input';
 import styled from 'styled-components';
 const UserNameStyled = styled.input`
@@ -18,13 +20,19 @@ export interface UserNameProps {
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
+	placeholder?: string;
 }
 export const UserName: FC<UserNameProps> = ({
 	onChange = () => {},
 	onFocus = () => {},
 	onBlur = () => {},
+	placeholder = '',
 }) => {
 	const [name, setName] = useState('');
+	const dispatch = useDispatch();
+	const userStore = useSelector((state) => state);
+	console.log(userStore);
+	console.log(userStore);
 	const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value);
 		onChange(e);
@@ -40,7 +48,7 @@ export const UserName: FC<UserNameProps> = ({
 			onFocus={onFocusInput}
 			onBlur={onBlurInput}
 			onChange={onChangeInput}
-			placeholder="Your name here"
+			placeholder={placeholder}
 			value={name}
 		/>
 	);

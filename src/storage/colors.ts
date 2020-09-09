@@ -1,6 +1,9 @@
+export const primary = '#000000';
+export const secondary = '#64ff64';
+export const buttonsTextColor = '#721972';
 export const green = '#64ff64';
 export const purple = '#64ff64';
-export const title = '#64ff64';
+export const title = primary;
 export const text = '#64ff64';
 export const textLight = '#64ff64';
 export const background = '#64ff64';

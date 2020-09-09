@@ -24,6 +24,7 @@ export const Home: FC<HomeProps> = () => {
 		<BackgroundStyled>
 			<PageContentStyled>
 				<div>
+					<Login />
 					<Game />
 				</div>
 			</PageContentStyled>
