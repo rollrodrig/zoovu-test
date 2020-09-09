@@ -8,7 +8,3 @@ export default {
 } as Meta;
 const Template: Story<InputProps> = (args) => <Input {...args} />;
 export const Default = Template.bind({});
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-// };
