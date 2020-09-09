@@ -7,3 +7,4 @@ export const title = primary;
 export const text = '#64ff64';
 export const textLight = '#64ff64';
 export const background = '#64ff64';
+export const error = '#f18383';

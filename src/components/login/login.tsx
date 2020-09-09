@@ -4,34 +4,61 @@ import styled from 'styled-components';
 import { Title } from '../typografy/title';
 import { Button } from '../form/button';
 import { ArrowRight } from '../icons/icons';
-// import { useSelector, useDispatch } from 'react-redux';
-// const dispatch = useDispatch();
-// const userStore = useSelector((state) => state);
+import { Error } from '../form/error';
+import { useSelector, useDispatch } from 'react-redux';
+import { setUserName } from '../../reducers/user';
 const LoginStyled = styled.div`
 	width: 100%;
 	max-width: 400px;
 	display: block;
-	margin: 100px auto 0 auto;
+	margin: 200px auto 0 auto;
 	text-align: center;
 `;
 const TitleStyled = styled.div`
 	margin-bottom: 40px;
 `;
-export interface LoginProps {}
-export const Login: FC<LoginProps> = () => {
-	const onChange = (e) => {
-		console.log(e.target.name);
+const UserInputStyled = styled.div`
+	text-align: center;
+	display: block;
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto 30px auto;
+	input {
+		text-align: center;
+	}
+`;
+export interface LoginProps {
+	onLogin: () => void;
+}
+export const Login: FC<LoginProps> = ({ onLogin }) => {
+	const [error, setError] = useState(false);
+	const [name, setName] = useState('');
+	const dispatch = useDispatch();
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setName(e.target.value);
+		if (error) {
+			setError(false);
+		}
 	};
-	const onLogin = () => {
-		console.log('on login');
+	const onUserLogin = () => {
+		if (name === '') {
+			setError(true);
+		} else {
+			setError(false);
+			onLogin();
+			dispatch(setUserName(name));
+		}
 	};
 	return (
 		<LoginStyled>
 			<TitleStyled>
-				<Title>Hello friend, tell me yout name</Title>
+				<Title>Hello friend, tell me your name</Title>
 			</TitleStyled>
-			<Input onChange={onChange} />
-			<Button onClick={onLogin}>
+			<UserInputStyled>
+				<Input placeholder="Your name here" onChange={onChange} />
+				{error ? <Error>Name is required</Error> : null}
+			</UserInputStyled>
+			<Button onClick={onUserLogin}>
 				Let&apos;s go <ArrowRight />
 			</Button>
 		</LoginStyled>

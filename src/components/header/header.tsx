@@ -3,6 +3,7 @@ import { Input } from '../form/input';
 import styled from 'styled-components';
 import { Title } from '../typografy/title';
 import { Score } from './score';
+import { useSelector } from 'react-redux';
 const HeaderStyles = styled.div`
 	padding: 10px 5px;
 	margin-bottom: 5px;
@@ -18,10 +19,11 @@ const HeaderRight = styled.div`
 `;
 export interface HeaderProps {}
 export const Header: FC<HeaderProps> = () => {
+	const userStore = useSelector((state: any) => state.user);
 	return (
 		<HeaderStyles>
 			<HeaderLeft>
-				<Title>Good luck, Your name here</Title>
+				<Title>Good luck, {userStore.name} here</Title>
 			</HeaderLeft>
 			<HeaderRight>
 				<Score />

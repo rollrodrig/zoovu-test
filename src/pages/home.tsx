@@ -20,13 +20,14 @@ const PageContentStyled = styled.div`
 `;
 export interface HomeProps {}
 export const Home: FC<HomeProps> = () => {
+	const [loged, setLoged] = useState(false);
+	const onLogin = () => {
+		setLoged(true);
+	};
 	return (
 		<BackgroundStyled>
 			<PageContentStyled>
-				<div>
-					<Login />
-					<Game />
-				</div>
+				{loged ? <Game /> : <Login onLogin={onLogin} />}
 			</PageContentStyled>
 		</BackgroundStyled>
 	);
