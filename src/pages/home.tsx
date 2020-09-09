@@ -1,6 +1,7 @@
 import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Login } from '../components/login/login';
+import { Game } from '../components/game/game';
 const BackgroundStyled = styled.div`
 	width: 100%;
 	height: 100vh;
@@ -12,14 +13,11 @@ const BackgroundStyled = styled.div`
 	);
 `;
 export interface HomeProps {}
-export const Home: FC<GameProps> = () => {
+export const Home: FC<HomeProps> = () => {
 	return (
 		<BackgroundStyled>
 			<div>
-				<Login />
-			</div>
-			<div>
-				s
+				<Game />
 			</div>
 		</BackgroundStyled>
 	);
