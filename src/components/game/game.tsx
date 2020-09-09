@@ -1,7 +1,7 @@
 import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
-import { Instructions } from './instructions';
+import { Instructions, InstructionsStyles } from './instructions';
 import { Header } from '../header/header';
 import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
@@ -13,7 +13,11 @@ export const Game: FC<GameProps> = () => {
 			<Header />
 			<Instructions />
 			<Draggables />
-			<Text>... and drop them here to make the logo great again!</Text>
+			<InstructionsStyles>
+				<Text>
+					... and drop them here to make the logo great again!
+				</Text>
+			</InstructionsStyles>
 			<Droppables />
 		</div>
 	);

@@ -2,9 +2,9 @@ import React, { FC, useState, ChangeEvent } from 'react';
 import { UserName } from '../form/user-name';
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
-const InstructionsStyles = styled.div`
+export const InstructionsStyles = styled.div`
 	padding: 10px 5px;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 	display: flex;
 	justify-content: space-between;
 `;
