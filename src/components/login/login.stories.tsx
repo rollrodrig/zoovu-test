@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { UserName, UserNameProps } from './user-name';
+import { Login, LoginProps } from './login';
 export default {
-	title: 'Example/UserName',
-	component: UserName,
+	title: 'Example/Login',
+	component: Login,
 	argTypes: {},
 } as Meta;
-const Template: Story<UserNameProps> = (args) => <UserName {...args} />;
+const Template: Story<LoginProps> = (args) => <Login {...args} />;
 export const Default = Template.bind({});
 // Primary.args = {
 //   primary: true,

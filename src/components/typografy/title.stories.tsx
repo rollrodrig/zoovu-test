@@ -1,12 +1,12 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { UserName, UserNameProps } from './user-name';
+import { Title, TitleProps } from './title';
 export default {
-	title: 'Example/UserName',
-	component: UserName,
+	title: 'Typografy/Title',
+	component: Title,
 	argTypes: {},
 } as Meta;
-const Template: Story<UserNameProps> = (args) => <UserName {...args} />;
+const Template: Story<TitleProps> = (args) => <Title>Title example text</Title>;
 export const Default = Template.bind({});
 // Primary.args = {
 //   primary: true,
