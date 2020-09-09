@@ -1,5 +1,5 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-import { UserName } from '../form/user-name';
+import { Input } from '../form/input';
 import styled from 'styled-components';
 import { Title } from '../typografy/title';
 import { IconClock } from '../icons/icons';

@@ -1,7 +1,4 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { Input } from './input';
 import styled from 'styled-components';
 const UserNameStyled = styled.input`
 	height: 40px;
@@ -12,29 +9,25 @@ const UserNameStyled = styled.input`
 	border-right: 0;
 	border-radius: 0;
 	border-bottom: 3px solid #e9eff5;
-	text-align: center;
 	font-style: italic;
 `;
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface UserNameProps {
+export interface InputProps {
 	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onFocus?: (e: ChangeEvent<HTMLInputElement>) => void;
 	onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
 	placeholder?: string;
+	value?: string;
 }
-export const UserName: FC<UserNameProps> = ({
+export const Input: FC<InputProps> = ({
 	onChange = () => {},
 	onFocus = () => {},
 	onBlur = () => {},
 	placeholder = '',
+	value = '',
 }) => {
-	const [name, setName] = useState('');
-	const dispatch = useDispatch();
-	const userStore = useSelector((state) => state);
-	console.log(userStore);
-	console.log(userStore);
+	const [inputValue, setInputValue] = useState(value);
 	const onChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-		setName(e.target.value);
+		setInputValue(e.target.value);
 		onChange(e);
 	};
 	const onFocusInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +42,7 @@ export const UserName: FC<UserNameProps> = ({
 			onBlur={onBlurInput}
 			onChange={onChangeInput}
 			placeholder={placeholder}
-			value={name}
+			value={inputValue}
 		/>
 	);
 };

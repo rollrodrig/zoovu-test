@@ -3,7 +3,7 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import { Button, ButtonProps } from './button';
 import { ArrowRight } from '../icons/icons';
 export default {
-	title: 'Example/Button',
+	title: 'Form/Button',
 	component: Button,
 	argTypes: {},
 } as Meta;

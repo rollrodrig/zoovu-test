@@ -1,9 +1,12 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-import { UserName } from '../form/user-name';
+import { Input } from '../form/input';
 import styled from 'styled-components';
 import { Title } from '../typografy/title';
 import { Button } from '../form/button';
 import { ArrowRight } from '../icons/icons';
+// import { useSelector, useDispatch } from 'react-redux';
+// const dispatch = useDispatch();
+// const userStore = useSelector((state) => state);
 const LoginStyled = styled.div`
 	width: 100%;
 	max-width: 400px;
@@ -27,7 +30,7 @@ export const Login: FC<LoginProps> = () => {
 			<TitleStyled>
 				<Title>Hello friend, tell me yout name</Title>
 			</TitleStyled>
-			<UserName onChange={onChange} />
+			<Input onChange={onChange} />
 			<Button onClick={onLogin}>
 				Let&apos;s go <ArrowRight />
 			</Button>

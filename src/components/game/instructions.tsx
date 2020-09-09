@@ -1,5 +1,5 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-import { UserName } from '../form/user-name';
+import { Input } from '../form/input';
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
 export const InstructionsStyles = styled.div`
