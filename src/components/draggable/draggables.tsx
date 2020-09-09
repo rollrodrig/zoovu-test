@@ -7,7 +7,8 @@ import zoovuv from './zoovu-v.svg';
 import zoovuz from './zoovu-z.svg';
 const CardsStyled = styled.div`
 	display: flex;
-	justify-content: space-space-around;
+	justify-content: space-between;
+	margin: 30px 0 80px 0;
 `;
 export interface DraggablesProps {}
 export const Draggables: FC<DraggablesProps> = () => {

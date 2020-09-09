@@ -4,7 +4,7 @@ import { Login } from '../components/login/login';
 import { Game } from '../components/game/game';
 const BackgroundStyled = styled.div`
 	width: 100%;
-	height: 100vh;
+	padding-bottom: 200px;
 	background: rgb(237, 248, 255);
 	background: linear-gradient(
 		0deg,
@@ -12,13 +12,21 @@ const BackgroundStyled = styled.div`
 		rgba(255, 255, 255, 1) 100%
 	);
 `;
+const PageContentStyled = styled.div`
+	width: 100%;
+	max-width: 1250px;
+	display: block;
+	margin: auto;
+`;
 export interface HomeProps {}
 export const Home: FC<HomeProps> = () => {
 	return (
 		<BackgroundStyled>
-			<div>
-				<Game />
-			</div>
+			<PageContentStyled>
+				<div>
+					<Game />
+				</div>
+			</PageContentStyled>
 		</BackgroundStyled>
 	);
 };
