@@ -34,8 +34,7 @@ export const Game: FC<GameProps> = () => {
 			const source = result.source.droppableId.split('_')[0];
 			const destination = result.destination.droppableId.split('_')[0];
 			if (source == destination) {
-				// dispatch(sortOnTargetDroppable(result));
-				console.log('re order');
+				dispatch(sortOnTargetDroppable(result));
 			} else {
 				dispatch(updateCards(result));
 			}

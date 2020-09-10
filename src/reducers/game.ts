@@ -4,20 +4,6 @@ import zoovuz from '../components/game/zoovu-z.svg';
 import zoovuo from '../components/game/zoovu-o.svg';
 import zoovuv from '../components/game/zoovu-v.svg';
 import zoovuu from '../components/game/zoovu-u.svg';
-const imagesTable: any = {
-	'draggable-card-0': zoovuz,
-	'draggable-card-1': zoovuo,
-	'draggable-card-2': zoovuo,
-	'draggable-card-3': zoovuv,
-	'draggable-card-4': zoovuu,
-};
-const imagesTableTarget: any = {
-	'draggable-target-0': zoovuz,
-	'draggable-target-1': zoovuo,
-	'draggable-target-2': zoovuo,
-	'draggable-target-3': zoovuv,
-	'draggable-target-4': zoovuu,
-};
 export const initialState = {
 	origin: shuffle([
 		{ id: '0', code: 'z', img: zoovuz },
@@ -57,8 +43,6 @@ export const updateTarget = (result: any) => {
 		const originState = getState().game.origin;
 		const targetState = getState().game.target;
 		const nextState = produce(targetState, (draftState: any) => {
-			// console.log(result.source.index)
-			// console.log(originState)
 			draftState[destinationIndex].img =
 				originState[result.source.index].img;
 		});
@@ -74,8 +58,10 @@ export const sortOnTargetDroppable = (result: any) => {
 	return (dispatch: any, getState: any) => {
 		const currentState = getState().game.target;
 		const nextState = produce(currentState, (draftState: any) => {
-			const [removed] = draftState.splice(sourceIndex, 1);
-			draftState.splice(targetIndex, 0, removed);
+			const tIndex = result.destination.index > 4 ? 4 : result.destination.index;
+			const tmp = draftState[tIndex];
+			draftState[tIndex] = draftState[result.source.index];
+			draftState[result.source.index] = tmp;
 		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
@@ -102,3 +88,7 @@ export const Game = (
 			return state;
 	}
 };
+// const nextState = produce(currentState, (draftState: any) => {
+// 	const [removed] = draftState.splice(sourceIndex, 1);
+// 	draftState.splice(targetIndex, 0, removed);
+// });

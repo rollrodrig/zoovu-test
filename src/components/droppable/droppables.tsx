@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { CardDrop } from '../card/card-drop';
-import { CardEmpty } from '../card/card-empty';
 import { Card } from '../card/card';
 const CardsStyled = styled.div`
 	display: flex;
@@ -11,6 +10,7 @@ const CardsStyled = styled.div`
 	position: relative;
 	justify-content: space-between;
 	margin: 30px 0 80px 0;
+	overflow: hidden;
 `;
 export const cardsCorrectPositions = [
 	{ id: 'card-cp-0', code: 'z' },
@@ -51,7 +51,7 @@ export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 										{c.img ? (
 											<Card img={c.img} />
 										) : (
-											<CardEmpty key={c.id} />
+											<CardDrop key={c.id} />
 										)}
 									</div>
 								)}
