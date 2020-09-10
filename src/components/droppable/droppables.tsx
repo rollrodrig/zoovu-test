@@ -2,13 +2,6 @@ import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { CardDrop } from './card-drop';
-export const cards = [
-	{ id: 'card-0', content: 'content z', code: 'z' },
-	{ id: 'card-1', content: 'content o', code: 'o' },
-	{ id: 'card-2', content: 'content o', code: 'o' },
-	{ id: 'card-3', content: 'content v', code: 'v' },
-	{ id: 'card-4', content: 'content u', code: 'u' },
-];
 const CardsStyled = styled.div`
 	display: flex;
 	height: 200px;
@@ -16,8 +9,17 @@ const CardsStyled = styled.div`
 	justify-content: space-between;
 	margin: 30px 0 80px 0;
 `;
-export interface DroppablesProps {}
-export const Droppables: FC<DroppablesProps> = () => {
+export const cardsCorrectPositions = [
+	{ id: 'card-cp-0', code: 'z' },
+	{ id: 'card-cp-1', code: 'o' },
+	{ id: 'card-cp-2', code: 'o' },
+	{ id: 'card-cp-3', code: 'v' },
+	{ id: 'card-cp-4', code: 'u' },
+];
+export interface DroppablesProps {
+	cards: any[];
+}
+export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 	return (
 		<CardsStyled>
 			{cards.map((c, index) => (
@@ -42,45 +44,10 @@ export const Droppables: FC<DroppablesProps> = () => {
 					display: 'flex',
 				}}
 			>
-				{cards.map((c) => (
+				{cardsCorrectPositions.map((c) => (
 					<CardDrop key={c.id} />
 				))}
 			</div>
 		</CardsStyled>
 	);
 };
-/*
-			<Droppable droppableId="dropable-1">
-				{(provided, snapshot) => (
-					<div ref={provided.innerRef}>
-						<CardDrop />
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-			<Droppable droppableId="dropable-2">
-				{(provided, snapshot) => (
-					<div ref={provided.innerRef}>
-						<CardDrop />
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-			<Droppable droppableId="dropable-3">
-				{(provided, snapshot) => (
-					<div ref={provided.innerRef}>
-						<CardDrop />
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-			<Droppable droppableId="dropable-4">
-				{(provided, snapshot) => (
-					<div ref={provided.innerRef}>
-						<CardDrop />
-						{provided.placeholder}
-					</div>
-				)}
-			</Droppable>
-		</CardsStyled>
-*/

@@ -1,32 +1,26 @@
 import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card } from './card';
-import zoovuz from './zoovu-z.svg';
-import zoovuo from './zoovu-o.svg';
-import zoovuv from './zoovu-v.svg';
-import zoovuu from './zoovu-u.svg';
-export const cards = [
-	{ id: 'card-0', content: 'content z', code: 'z', img: zoovuz },
-	{ id: 'card-1', content: 'content o', code: 'o', img: zoovuo },
-	{ id: 'card-2', content: 'content o', code: 'o', img: zoovuo },
-	{ id: 'card-3', content: 'content v', code: 'v', img: zoovuv },
-	{ id: 'card-4', content: 'content u', code: 'u', img: zoovuu },
-];
 const CardsStyled = styled.div`
 	display: flex;
 	justify-content: space-between;
 	margin: 30px 0 80px 0;
 `;
-export interface DraggablesProps {}
 const ItemsStyle = (isDraggingOver: any) => ({});
 const listItemStyles = (isDragging: any, draggableStyle: any) => ({
 	...draggableStyle,
 });
-export const Draggables: FC<DraggablesProps> = () => {
+export interface DraggablesProps {
+	cards: any[];
+}
+export const Draggables: FC<DraggablesProps> = ({ cards }) => {
+	const gameStore = useSelector((state: any) => state.game);
+	console.log(gameStore)
 	return (
 		<CardsStyled>
-			{cards.map((c, index) => (
+			{gameStore.origin.map((c: any, index: number) => (
 				<Droppable
 					key={c.id}
 					droppableId={`droppable-${c.id}`}

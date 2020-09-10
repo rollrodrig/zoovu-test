@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Card, CardProps } from './card';
-import imageExample from './zoovu-u.svg';
+import imageExample from '../game/zoovu-u.svg';
 export default {
 	title: 'Components/Card',
 	component: Card,

@@ -1,4 +1,5 @@
 import React, { FC, useState, ChangeEvent } from 'react';
+
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
 import { Instructions, InstructionsStyles } from './instructions';
@@ -6,6 +7,17 @@ import { Header } from '../header/header';
 import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
+import zoovuz from './zoovu-z.svg';
+import zoovuo from './zoovu-o.svg';
+import zoovuv from './zoovu-v.svg';
+import zoovuu from './zoovu-u.svg';
+export const cards = [
+	{ id: 'card-0', content: 'content z', code: 'z', img: zoovuz },
+	{ id: 'card-1', content: 'content o', code: 'o', img: zoovuo },
+	{ id: 'card-2', content: 'content o', code: 'o', img: zoovuo },
+	{ id: 'card-3', content: 'content v', code: 'v', img: zoovuv },
+	{ id: 'card-4', content: 'content u', code: 'u', img: zoovuu },
+];
 export interface GameProps {}
 export const Game: FC<GameProps> = () => {
 	const onDragStart = () => {
@@ -32,8 +44,8 @@ export const Game: FC<GameProps> = () => {
 				onDragUpdate={onDragUpdate}
 				onDragEnd={onDragEnd}
 			>
-				<Draggables />
-				<Droppables />
+				<Draggables cards={cards} />
+				<Droppables cards={cards} />
 			</DragDropContext>
 		</div>
 	);
