@@ -8,7 +8,3 @@ export default {
 } as Meta;
 const Template: Story<HomeProps> = (args: any) => <Home />;
 export const Default = Template.bind({});
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-// };

@@ -4,6 +4,7 @@ import { Login } from '../components/login/login';
 import { Game } from '../components/game/game';
 const BackgroundStyled = styled.div`
 	width: 100%;
+	height: 100vh;
 	padding-bottom: 100px;
 	background: rgb(237, 248, 255);
 	background: linear-gradient(
@@ -28,8 +29,6 @@ export const Home: FC<HomeProps> = () => {
 		<BackgroundStyled>
 			<PageContentStyled>
 				{loged ? <Game /> : <Login onLogin={onLogin} />}
-				{/* <Login onLogin={onLogin} /> */}
-				{/* <Game /> */}
 			</PageContentStyled>
 		</BackgroundStyled>
 	);
