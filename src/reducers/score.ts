@@ -20,13 +20,16 @@ export const verifyOrder = (target: any[]) => {
 	return true;
 };
 export const setSuccess = () => {
-	return { type: ACTIONS.SCORE_SUCCESS, payload: {}}
+	return (dispatch: any, getState: any) => {
+		dispatch({ type: ACTIONS.SCORE_SUCCESS, payload: {} });
+		dispatch({ type: ACTIONS.SCORE_RUN_TIMER, payload: { run: false } });
+	};
 };
-export const runTimer = () => {
+export const runTimer = (run: boolean) => {
 	return (dispatch: any, getState: any) => {
 		const currentScore = getState().score;
 		if (currentScore.playing === false) {
-			dispatch({ type: ACTIONS.SCORE_RUN_TIMER, payload: {} });
+			dispatch({ type: ACTIONS.SCORE_RUN_TIMER, payload: { run: run } });
 		}
 	};
 };
@@ -55,7 +58,7 @@ export const Score = (
 		case ACTIONS.SCORE_RUN_TIMER:
 			return {
 				...state,
-				playing: true,
+				playing: action.payload.run,
 			};
 		case ACTIONS.SCORE_ERROR:
 			return {

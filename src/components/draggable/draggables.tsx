@@ -15,10 +15,8 @@ const ItemsStyle = (isDraggingOver: any) => ({});
 const listItemStyles = (isDragging: any, draggableStyle: any) => ({
 	...draggableStyle,
 });
-export interface DraggablesProps {
-	cards: any[];
-}
-export const Draggables: FC<DraggablesProps> = ({ cards }) => {
+export interface DraggablesProps {}
+export const Draggables: FC<DraggablesProps> = () => {
 	const gameStore = useSelector((state: any) => state.game);
 	return (
 		<CardsStyled>

@@ -19,10 +19,8 @@ export const cardsCorrectPositions = [
 	{ id: 'card-cp-3', code: 'v' },
 	{ id: 'card-cp-4', code: 'u' },
 ];
-export interface DroppablesProps {
-	cards: any[];
-}
-export const Droppables: FC<DroppablesProps> = ({ cards }) => {
+export interface DroppablesProps {}
+export const Droppables: FC<DroppablesProps> = () => {
 	const gameStore = useSelector((state: any) => state.game);
 	return (
 		<CardsStyled>
