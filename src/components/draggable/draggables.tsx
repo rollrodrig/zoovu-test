@@ -5,12 +5,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card } from '../card/card';
 import { CardDrop } from '../card/card-drop';
 import { CardEmpty } from '../card/card-empty';
-const CardsStyled = styled.div`
-	display: flex;
-	justify-content: space-between;
-	margin: 30px 0 80px 0;
-	height: 200px;
-`;
+import { DraggableWraper } from './draggable-wrapper';
 const ItemsStyle = (isDraggingOver: any) => ({});
 const listItemStyles = (isDragging: any, draggableStyle: any) => ({
 	...draggableStyle,
@@ -19,7 +14,7 @@ export interface DraggablesProps {}
 export const Draggables: FC<DraggablesProps> = () => {
 	const gameStore = useSelector((state: any) => state.game);
 	return (
-		<CardsStyled>
+		<DraggableWraper>
 			{gameStore.origin.map((c: any, index: number) => (
 				<Droppable
 					key={c.id}
@@ -60,6 +55,6 @@ export const Draggables: FC<DraggablesProps> = () => {
 					)}
 				</Droppable>
 			))}
-		</CardsStyled>
+		</DraggableWraper>
 	);
 };
