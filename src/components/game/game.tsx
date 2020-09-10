@@ -1,12 +1,13 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
+import { useSelector, useDispatch } from 'react-redux';
 import { Instructions, InstructionsStyles } from './instructions';
 import { Header } from '../header/header';
 import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
+import { updateTarget } from '../../reducers/game';
 import zoovuz from './zoovu-z.svg';
 import zoovuo from './zoovu-o.svg';
 import zoovuv from './zoovu-v.svg';
@@ -20,6 +21,7 @@ export const cards = [
 ];
 export interface GameProps {}
 export const Game: FC<GameProps> = () => {
+	const dispatch = useDispatch();
 	const onDragStart = () => {
 		console.log('onDragStart');
 	};
@@ -27,8 +29,8 @@ export const Game: FC<GameProps> = () => {
 		console.log('onDragUpdate');
 	};
 	const onDragEnd = (result: any) => {
-		console.log('drag ended');
 		console.log(result);
+		dispatch(updateTarget(result.source, result.destination));
 	};
 	return (
 		<div>

@@ -1,7 +1,9 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { useSelector } from 'react-redux';
+import { Droppable } from 'react-beautiful-dnd';
 import { CardDrop } from './card-drop';
+import { Card } from '../card/card';
 const CardsStyled = styled.div`
 	display: flex;
 	height: 200px;
@@ -20,9 +22,10 @@ export interface DroppablesProps {
 	cards: any[];
 }
 export const Droppables: FC<DroppablesProps> = ({ cards }) => {
+	const gameStore = useSelector((state: any) => state.game);
 	return (
 		<CardsStyled>
-			{cards.map((c, index) => (
+			{gameStore.target.map((c: any, index: number) => (
 				<Droppable
 					key={c.id}
 					droppableId={`droppable-target-${c.id}`}
@@ -30,13 +33,17 @@ export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 				>
 					{(provided, snapshot) => (
 						<div ref={provided.innerRef} style={{ width: '200px' }}>
-							{/* <CardDrop /> */}
+							{c.img ? (
+								<Card img={c.img} />
+							) : (
+								<CardDrop key={c.id} />
+							)}
 							{provided.placeholder}
 						</div>
 					)}
 				</Droppable>
 			))}
-			<div
+			{/* <div
 				style={{
 					position: 'absolute',
 					top: 0,
@@ -44,10 +51,10 @@ export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 					display: 'flex',
 				}}
 			>
-				{cardsCorrectPositions.map((c) => (
-					<CardDrop key={c.id} />
-				))}
-			</div>
+				{gameStore.target.map((c: any) =>
+					c.img ? null : <CardDrop key={c.id} />
+				)}
+			</div> */}
 		</CardsStyled>
 	);
 };

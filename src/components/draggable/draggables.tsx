@@ -1,8 +1,8 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import { Card } from './card';
+import { Card } from '../card/card';
 const CardsStyled = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -17,7 +17,6 @@ export interface DraggablesProps {
 }
 export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 	const gameStore = useSelector((state: any) => state.game);
-	console.log(gameStore)
 	return (
 		<CardsStyled>
 			{gameStore.origin.map((c: any, index: number) => (

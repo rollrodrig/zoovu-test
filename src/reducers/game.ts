@@ -1,15 +1,17 @@
 import { shuffle } from 'lodash';
+import produce from 'immer';
 import zoovuz from '../components/game/zoovu-z.svg';
 import zoovuo from '../components/game/zoovu-o.svg';
 import zoovuv from '../components/game/zoovu-v.svg';
 import zoovuu from '../components/game/zoovu-u.svg';
+const imagesTable: any = {
+	'card-0': zoovuz,
+	'card-1': zoovuo,
+	'card-2': zoovuo,
+	'card-3': zoovuv,
+	'card-4': zoovuu,
+};
 export const initialState = {
-	images: {
-		z: zoovuz,
-		o: zoovuo,
-		v: zoovuv,
-		u: zoovuu,
-	},
 	origin: shuffle([
 		{ id: 'card-0', code: 'z', img: zoovuz },
 		{ id: 'card-1', code: 'o', img: zoovuo },
@@ -29,20 +31,30 @@ const ACTIONS = {
 	GAME_UPDATE_ORIGIN: 'GAME_UPDATE_ORIGIN',
 	GAME_UPDATE_TARGET: 'GAME_UPDATE_TARGET',
 };
-const updateOrigin = (cardId: string, targetId: string) => {
+const updateOrigin = (source: any) => {
 	return (dispatch: any, getState: any) => {
+		const currentState = getState().game.origin;
+		const nextState = produce(currentState, (draftState: any) => {
+			draftState[source.index].img = null;
+		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_ORIGIN,
-			payload: { cardId, targetId },
+			payload: { origin: nextState },
 		});
 	};
 };
-const updateTarget = (cardId: string, targetId: string) => {
+export const updateTarget = (source: any, destination: any) => {
 	return (dispatch: any, getState: any) => {
-		dispatch(updateOrigin(cardId, targetId));
+		// dispatch(updateOrigin(source));
+		const sourceId = source.droppableId.split('').pop();
+		const destinationId = destination.droppableId.split('').pop();
+		const currentState = getState().game.target;
+		const nextState = produce(currentState, (draftState: any) => {
+			draftState[destinationId].img = imagesTable[`card-${sourceId}`];
+		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
-			payload: { cardId, targetId },
+			payload: { target: nextState },
 		});
 	};
 };
@@ -54,10 +66,12 @@ export const Game = (
 		case ACTIONS.GAME_UPDATE_ORIGIN:
 			return {
 				...state,
+				origin: action.payload.origin,
 			};
 		case ACTIONS.GAME_UPDATE_TARGET:
 			return {
 				...state,
+				target: action.payload.target,
 			};
 		default:
 			return state;
