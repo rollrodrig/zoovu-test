@@ -14,7 +14,7 @@ const BackgroundStyled = styled.div`
 `;
 const PageContentStyled = styled.div`
 	width: 100%;
-	max-width: 1250px;
+	max-width: 1000px;
 	display: block;
 	margin: auto;
 `;

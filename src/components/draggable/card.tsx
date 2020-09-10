@@ -2,13 +2,13 @@ import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 
 const CardContainer = styled.div`
-	width: 25%;
+	width: 200px;
 `;
 const CardItem = styled.div`
 	display: flex;
 	margin: auto;
 	width: 90%;
-	height: 250px;
+	height: 200px;
 	background-color: #ffffff;
 	border-radius: 10px;
 	box-shadow: 0px 0px 22px rgba(0, 0, 0, 0.1);
@@ -18,7 +18,7 @@ const CardItem = styled.div`
 const CardImage = styled.img`
 	display: block;
 	width: 80%;
-	max-width: 150px;
+	max-width: 100px;
 `;
 export interface CardProps {
 	img: string;
