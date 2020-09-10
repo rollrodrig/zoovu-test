@@ -4,7 +4,6 @@ import { Login } from '../components/login/login';
 import { Game } from '../components/game/game';
 const BackgroundStyled = styled.div`
 	width: 100%;
-	padding-bottom: 200px;
 	background: rgb(237, 248, 255);
 	background: linear-gradient(
 		0deg,

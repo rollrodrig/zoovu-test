@@ -6,7 +6,7 @@ import zoovuz from './zoovu-z.svg';
 import zoovuo from './zoovu-o.svg';
 import zoovuv from './zoovu-v.svg';
 import zoovuu from './zoovu-u.svg';
-const cards = [
+export const cards = [
 	{ id: 'card-0', content: 'content z', code: 'z', img: zoovuz },
 	{ id: 'card-1', content: 'content o', code: 'o', img: zoovuo },
 	{ id: 'card-2', content: 'content o', code: 'o', img: zoovuo },
@@ -31,6 +31,8 @@ export const Draggables: FC<DraggablesProps> = () => {
 					key={c.id}
 					droppableId={`droppable-${c.id}`}
 					direction="horizontal"
+					isDropDisabled={true}
+					ignoreContainerClipping={false}
 				>
 					{(provided, snapshot) => (
 						<div
