@@ -4,6 +4,7 @@ const ACTIONS = {
 	SCORE_RUN_TIMER: 'SCORE_RUN_TIMER',
 	SCORE_ERROR: 'SCORE_ERROR',
 	SCORE_SUCCESS: 'SCORE_SUCCESS',
+	SCORE_RESET: 'SCORE_RESET',
 };
 export const errorOnCards = () => {
 	return (dispatch: any, getState: any) => {
@@ -33,15 +34,26 @@ export const runTimer = (run: boolean) => {
 		}
 	};
 };
-export const initialState = {
+export const setTime = (time: number) => {
+	return { type: ACTIONS.SCORE_SET_TIME, payload: { time: time } };
+};
+export const resetStore = () => {
+	return (dispatch: any, getState: any) => {
+		dispatch({
+			type: ACTIONS.SCORE_RESET,
+			payload: { state: initialState() },
+		});
+	};
+};
+export const initialState = () => ({
 	success: false,
 	score: 0,
 	time: 0,
 	playing: false,
 	error: 0,
-};
+});
 export const Score = (
-	state = initialState,
+	state = initialState(),
 	action: { type: string; payload: any }
 ) => {
 	switch (action.type) {
@@ -69,6 +81,10 @@ export const Score = (
 			return {
 				...state,
 				success: true,
+			};
+		case ACTIONS.SCORE_RESET:
+			return {
+				...action.payload.state,
 			};
 		default:
 			return state;

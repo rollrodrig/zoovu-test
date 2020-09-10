@@ -7,7 +7,11 @@ import { Header } from '../header/header';
 import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { updateCards, sortOnTargetDroppable } from '../../reducers/game';
+import {
+	updateCards,
+	sortOnTargetDroppable,
+	resetGame,
+} from '../../reducers/game';
 import { runTimer, verifyOrder, setSuccess } from '../../reducers/score';
 import { WinMessage } from './win-message';
 export interface GameProps {}
@@ -19,6 +23,11 @@ export const Game: FC<GameProps> = () => {
 		if (verifyOrder(gameTargetState) === true) {
 			dispatch(setSuccess());
 			setPlay(false);
+			setTimeout(() => {
+				console.log('reset game');
+				dispatch(resetGame());
+				setPlay(true);
+			}, 5000);
 		}
 	}, [gameTargetState]);
 	const onDragStart = () => {

@@ -1,11 +1,11 @@
 import { shuffle } from 'lodash';
 import produce from 'immer';
-import { errorOnCards, verifyOrder } from './score';
+import { errorOnCards, resetStore } from './score';
 import zoovuz from '../components/game/zoovu-z.svg';
 import zoovuo from '../components/game/zoovu-o.svg';
 import zoovuv from '../components/game/zoovu-v.svg';
 import zoovuu from '../components/game/zoovu-u.svg';
-export const initialState = {
+export const initialState = () => ({
 	origin: shuffle([
 		{ id: '0', code: 'z', img: zoovuz },
 		{ id: '1', code: 'o', img: zoovuo },
@@ -20,10 +20,11 @@ export const initialState = {
 		{ id: '3', code: null, img: null },
 		{ id: '4', code: null, img: null },
 	],
-};
+});
 const ACTIONS = {
 	GAME_UPDATE_ORIGIN: 'GAME_UPDATE_ORIGIN',
 	GAME_UPDATE_TARGET: 'GAME_UPDATE_TARGET',
+	GAME_RESET: 'GAME_RESET',
 };
 const verifyMatch = (result: any) => {
 	const cardId = result.draggableId.split('_')[1];
@@ -79,8 +80,17 @@ export const sortOnTargetDroppable = (result: any) => {
 		});
 	};
 };
+export const resetGame = () => {
+	return (dispatch: any) => {
+		dispatch(resetStore());
+		return dispatch({
+			type: ACTIONS.GAME_RESET,
+			payload: { state: initialState() },
+		});
+	};
+};
 export const Game = (
-	state = initialState,
+	state = initialState(),
 	action: { type: string; payload: any }
 ) => {
 	switch (action.type) {
@@ -93,6 +103,10 @@ export const Game = (
 			return {
 				...state,
 				target: action.payload.target,
+			};
+		case ACTIONS.GAME_RESET:
+			return {
+				...action.payload.state,
 			};
 		default:
 			return state;
