@@ -1,6 +1,6 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { IconCoffe, IconClock } from './icons';
+import { IconCoffe } from './icons';
 export default {
 	title: 'Icons/IconCoffe',
 	component: IconCoffe,

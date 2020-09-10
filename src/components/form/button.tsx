@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 import styled from 'styled-components';
-import { secondary, buttonsTextColor } from '../../storage/colors';
+import { buttonsTextColor } from '../../storage/colors';
 const ButtonStyled = styled.button`
 	border: 1px solid #c7e4ea;
 	border-radius: 30px;

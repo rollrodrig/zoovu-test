@@ -1,5 +1,4 @@
 import React, { FC, useState, ChangeEvent } from 'react';
-import { Input } from '../form/input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faCoffee,

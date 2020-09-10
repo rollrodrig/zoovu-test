@@ -2,7 +2,7 @@ import React from 'react';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { Timer, TimerProps } from './timer';
 export default {
-	title: 'Example/Timer',
+	title: 'Header/Timer',
 	component: Timer,
 	argTypes: {},
 } as Meta;
