@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Title } from '../typografy/title';
 import { IconClock } from '../icons/icons';
 import { Timer } from './timer';
+import { useSelector } from 'react-redux';
 const ScoreStyled = styled.div`
 	color: #721972;
 `;

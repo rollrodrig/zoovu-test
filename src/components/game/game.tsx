@@ -8,6 +8,7 @@ import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { updateCards, sortOnTargetDroppable } from '../../reducers/game';
+import { runTimer } from '../../reducers/score';
 import zoovuz from './zoovu-z.svg';
 import zoovuo from './zoovu-o.svg';
 import zoovuv from './zoovu-v.svg';
@@ -24,6 +25,7 @@ export const Game: FC<GameProps> = () => {
 	const dispatch = useDispatch();
 	const onDragStart = () => {
 		console.log('onDragStart');
+		dispatch(runTimer());
 	};
 	const onDragUpdate = () => {
 		console.log('onDragUpdate');
