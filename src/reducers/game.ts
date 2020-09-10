@@ -45,12 +45,13 @@ const updateOrigin = (source: any) => {
 };
 export const updateTarget = (source: any, destination: any) => {
 	return (dispatch: any, getState: any) => {
-		// dispatch(updateOrigin(source));
+		dispatch(updateOrigin(source));
 		const sourceId = source.droppableId.split('').pop();
 		const destinationId = destination.droppableId.split('').pop();
+		const destinationIndex = destination.index;
 		const currentState = getState().game.target;
 		const nextState = produce(currentState, (draftState: any) => {
-			draftState[destinationId].img = imagesTable[`card-${sourceId}`];
+			draftState[destinationIndex].img = imagesTable[`card-${sourceId}`];
 		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,

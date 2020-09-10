@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card } from '../card/card';
+import { CardDrop } from '../card/card-drop';
 const CardsStyled = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -35,6 +36,7 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 							<Draggable
 								draggableId={`draggable-${c.id}`}
 								index={index}
+								isDragDisabled={c.img ? false : true}
 							>
 								{(provided, snapshot) => (
 									<div
@@ -46,7 +48,11 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 											provided.draggableProps.style
 										)}
 									>
-										<Card img={c.img} />
+										{c.img ? (
+											<Card img={c.img} />
+										) : (
+											<CardDrop key={c.id} />
+										)}
 									</div>
 								)}
 							</Draggable>

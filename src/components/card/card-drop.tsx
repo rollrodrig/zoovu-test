@@ -22,7 +22,7 @@ export interface CardDropProps {}
 export const CardDrop: FC<CardDropProps> = () => {
 	return (
 		<CardDropContainer>
-			<CardDropItem>Drop here</CardDropItem>
+			<CardDropItem></CardDropItem>
 		</CardDropContainer>
 	);
 };
