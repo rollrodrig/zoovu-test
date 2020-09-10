@@ -6,9 +6,5 @@ export default {
 	component: Timer,
 	argTypes: {},
 } as Meta;
-const Template: Story<TimerProps> = (args) => <Timer {...args} />;
+const Template: Story<TimerProps> = (args) => <Timer time={20} />;
 export const Default = Template.bind({});
-// Primary.args = {
-//   primary: true,
-//   label: 'Button',
-// };
