@@ -26,15 +26,12 @@ export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 	const gameStore = useSelector((state: any) => state.game);
 	return (
 		<CardsStyled>
-			{gameStore.target.map((c: any, index: number) => (
-				<Droppable
-					key={c.id}
-					droppableId={`droppable-target-${c.id}`}
-					direction="horizontal"
-				>
-					{(provided, snapshot) => (
-						<div ref={provided.innerRef} style={{ width: '200px' }}>
+			<Droppable droppableId={`droppable-target`} direction="horizontal">
+				{(provided, snapshot) => (
+					<div ref={provided.innerRef} style={{ display: 'flex' }}>
+						{gameStore.target.map((c: any, index: number) => (
 							<Draggable
+								key={c.id}
 								draggableId={`draggable-target-${c.id}`}
 								index={index}
 								isDragDisabled={c.img ? false : true}
@@ -56,11 +53,11 @@ export const Droppables: FC<DroppablesProps> = ({ cards }) => {
 									</div>
 								)}
 							</Draggable>
-							{provided.placeholder}
-						</div>
-					)}
-				</Droppable>
-			))}
+						))}
+						{provided.placeholder}
+					</div>
+				)}
+			</Droppable>
 			{/* <div
 				style={{
 					position: 'absolute',

@@ -56,7 +56,6 @@ export const updateTarget = (result: any) => {
 		const destinationIndex = result.destination.index;
 		const currentState = getState().game.target;
 		const nextState = produce(currentState, (draftState: any) => {
-			// draftState[result.source.index].img =
 			draftState[destinationIndex].img = imagesTable[result.draggableId];
 		});
 		return dispatch({
@@ -65,14 +64,21 @@ export const updateTarget = (result: any) => {
 		});
 	};
 };
-export const updateOnTarget = (result: any) => {
+export const sortOnTargetDroppable = (result: any) => {
+	const sourceIndex = result.source.index;
+	const targetIndex = result.destination.index;
 	return (dispatch: any, getState: any) => {
+		const currentState = getState().game.target;
+		const nextState = produce(currentState, (draftState: any) => {
+			const [removed] = draftState.splice(sourceIndex, 1);
+			draftState.splice(targetIndex, 0, removed);
+		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
-			payload: { target: {} },
+			payload: { target: nextState },
 		});
-	}
-}
+	};
+};
 export const Game = (
 	state = initialState,
 	action: { type: string; payload: any }

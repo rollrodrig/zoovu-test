@@ -7,7 +7,7 @@ import { Header } from '../header/header';
 import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
-import { updateTarget } from '../../reducers/game';
+import { updateTarget, sortOnTargetDroppable } from '../../reducers/game';
 import zoovuz from './zoovu-z.svg';
 import zoovuo from './zoovu-o.svg';
 import zoovuv from './zoovu-v.svg';
@@ -31,7 +31,11 @@ export const Game: FC<GameProps> = () => {
 	const onDragEnd = (result: any) => {
 		console.log(result);
 		if (result.destination) {
-			dispatch(updateTarget(result));
+			if (result.destination.droppableId == result.source.droppableId) {
+				dispatch(sortOnTargetDroppable(result));
+			} else {
+				dispatch(updateTarget(result));
+			}
 		}
 	};
 	return (
