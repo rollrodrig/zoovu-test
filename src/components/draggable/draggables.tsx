@@ -24,7 +24,7 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 			{gameStore.origin.map((c: any, index: number) => (
 				<Droppable
 					key={c.id}
-					droppableId={`droppable-origin-${c.id}`}
+					droppableId={`droppable-origin_${c.id}`}
 					direction="horizontal"
 					isDropDisabled={true}
 				>
@@ -34,7 +34,7 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 							style={ItemsStyle(snapshot.isDraggingOver)}
 						>
 							<Draggable
-								draggableId={`draggable-card-${c.id}`}
+								draggableId={`draggable-origin_${c.id}`}
 								index={index}
 								isDragDisabled={c.img ? false : true}
 							>

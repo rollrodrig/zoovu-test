@@ -38,10 +38,11 @@ const ACTIONS = {
 	GAME_UPDATE_ORIGIN: 'GAME_UPDATE_ORIGIN',
 	GAME_UPDATE_TARGET: 'GAME_UPDATE_TARGET',
 };
-const updateOrigin = (result: any) => {
+export const updateCards = (result: any) => {
 	return (dispatch: any, getState: any) => {
-		const currentState = getState().game.origin;
-		const nextState = produce(currentState, (draftState: any) => {
+		dispatch(updateTarget(result));
+		const originState = getState().game.origin;
+		const nextState = produce(originState, (draftState: any) => {
 			draftState[result.source.index].img = null;
 		});
 		return dispatch({
@@ -52,11 +53,14 @@ const updateOrigin = (result: any) => {
 };
 export const updateTarget = (result: any) => {
 	return (dispatch: any, getState: any) => {
-		dispatch(updateOrigin(result));
 		const destinationIndex = result.destination.index;
-		const currentState = getState().game.target;
-		const nextState = produce(currentState, (draftState: any) => {
-			draftState[destinationIndex].img = imagesTable[result.draggableId];
+		const originState = getState().game.origin;
+		const targetState = getState().game.target;
+		const nextState = produce(targetState, (draftState: any) => {
+			// console.log(result.source.index)
+			// console.log(originState)
+			draftState[destinationIndex].img =
+				originState[result.source.index].img;
 		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
