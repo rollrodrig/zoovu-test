@@ -3,11 +3,24 @@ const ACTIONS = {
 	SCORE_SET_SCORE: 'SCORE_SET_SCORE',
 	SCORE_RUN_TIMER: 'SCORE_RUN_TIMER',
 	SCORE_ERROR: 'SCORE_ERROR',
+	SCORE_SUCCESS: 'SCORE_SUCCESS',
 };
 export const errorOnCards = () => {
 	return (dispatch: any, getState: any) => {
 		dispatch({ type: ACTIONS.SCORE_ERROR, payload: {} });
 	};
+};
+export const verifyOrder = (target: any[]) => {
+	const expect = ['z', 'o', 'o', 'v', 'u'];
+	for (let i = 0; i < target.length; i++) {
+		if (target[i].code !== expect[i]) {
+			return false;
+		}
+	}
+	return true;
+};
+export const setSuccess = () => {
+	return { type: ACTIONS.SCORE_SUCCESS, payload: {}}
 };
 export const runTimer = () => {
 	return (dispatch: any, getState: any) => {
@@ -18,6 +31,7 @@ export const runTimer = () => {
 	};
 };
 export const initialState = {
+	success: false,
 	score: 0,
 	time: 0,
 	playing: false,
@@ -47,6 +61,11 @@ export const Score = (
 			return {
 				...state,
 				error: state.error + 1,
+			};
+		case ACTIONS.SCORE_SUCCESS:
+			return {
+				...state,
+				success: true,
 			};
 		default:
 			return state;

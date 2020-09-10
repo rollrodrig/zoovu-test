@@ -1,5 +1,6 @@
 import { shuffle } from 'lodash';
 import produce from 'immer';
+import { errorOnCards, verifyOrder } from './score';
 import zoovuz from '../components/game/zoovu-z.svg';
 import zoovuo from '../components/game/zoovu-o.svg';
 import zoovuv from '../components/game/zoovu-v.svg';
@@ -13,20 +14,26 @@ export const initialState = {
 		{ id: '4', code: 'u', img: zoovuu },
 	]),
 	target: [
-		{ id: '0', code: 'z', img: null },
-		{ id: '1', code: 'o', img: null },
-		{ id: '2', code: 'o', img: null },
-		{ id: '3', code: 'v', img: null },
-		{ id: '4', code: 'u', img: null },
+		{ id: '0', code: null, img: null },
+		{ id: '1', code: null, img: null },
+		{ id: '2', code: null, img: null },
+		{ id: '3', code: null, img: null },
+		{ id: '4', code: null, img: null },
 	],
 };
 const ACTIONS = {
 	GAME_UPDATE_ORIGIN: 'GAME_UPDATE_ORIGIN',
 	GAME_UPDATE_TARGET: 'GAME_UPDATE_TARGET',
 };
+const verifyMatch = (result: any) => {
+	const cardId = result.draggableId.split('_')[1];
+	const destintyId = result.destination.droppableId.split('_')[1];
+	return cardId === destintyId;
+};
 export const updateCards = (result: any) => {
 	return (dispatch: any, getState: any) => {
 		dispatch(updateTarget(result));
+		if (verifyMatch(result) === false) dispatch(errorOnCards());
 		const originState = getState().game.origin;
 		const nextState = produce(originState, (draftState: any) => {
 			draftState[result.source.index].img = null;
@@ -37,7 +44,7 @@ export const updateCards = (result: any) => {
 		});
 	};
 };
-export const updateTarget = (result: any) => {
+const updateTarget = (result: any) => {
 	return (dispatch: any, getState: any) => {
 		const destinationIndex = result.destination.index;
 		const originState = getState().game.origin;
@@ -45,6 +52,8 @@ export const updateTarget = (result: any) => {
 		const nextState = produce(targetState, (draftState: any) => {
 			draftState[destinationIndex].img =
 				originState[result.source.index].img;
+			draftState[destinationIndex].code =
+				originState[result.source.index].code;
 		});
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
@@ -58,7 +67,8 @@ export const sortOnTargetDroppable = (result: any) => {
 	return (dispatch: any, getState: any) => {
 		const currentState = getState().game.target;
 		const nextState = produce(currentState, (draftState: any) => {
-			const tIndex = result.destination.index > 4 ? 4 : result.destination.index;
+			const tIndex =
+				result.destination.index > 4 ? 4 : result.destination.index;
 			const tmp = draftState[tIndex];
 			draftState[tIndex] = draftState[result.source.index];
 			draftState[result.source.index] = tmp;
@@ -88,7 +98,3 @@ export const Game = (
 			return state;
 	}
 };
-// const nextState = produce(currentState, (draftState: any) => {
-// 	const [removed] = draftState.splice(sourceIndex, 1);
-// 	draftState.splice(targetIndex, 0, removed);
-// });

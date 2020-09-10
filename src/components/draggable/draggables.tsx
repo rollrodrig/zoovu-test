@@ -9,6 +9,7 @@ const CardsStyled = styled.div`
 	display: flex;
 	justify-content: space-between;
 	margin: 30px 0 80px 0;
+	height: 200px;
 `;
 const ItemsStyle = (isDraggingOver: any) => ({});
 const listItemStyles = (isDragging: any, draggableStyle: any) => ({

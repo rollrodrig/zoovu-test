@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC, useEffect, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { Text } from '../typografy/text';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import { Draggables } from '../draggable/draggables';
 import { Droppables } from '../droppable/droppables';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { updateCards, sortOnTargetDroppable } from '../../reducers/game';
-import { runTimer } from '../../reducers/score';
+import { runTimer, verifyOrder } from '../../reducers/score';
 import zoovuz from './zoovu-z.svg';
 import zoovuo from './zoovu-o.svg';
 import zoovuv from './zoovu-v.svg';
@@ -23,6 +23,12 @@ export const cards = [
 export interface GameProps {}
 export const Game: FC<GameProps> = () => {
 	const dispatch = useDispatch();
+	const gameTargetState = useSelector((state: any) => state.game.target);
+	useEffect(() => {
+		if (verifyOrder(gameTargetState) === true) {
+			console.log('game win');
+		}
+	}, [gameTargetState]);
 	const onDragStart = () => {
 		console.log('onDragStart');
 		dispatch(runTimer());
@@ -46,17 +52,17 @@ export const Game: FC<GameProps> = () => {
 		<div>
 			<Header />
 			<Instructions />
-			<InstructionsStyles>
-				<Text>
-					... and drop them here to make the logo great again!
-				</Text>
-			</InstructionsStyles>
 			<DragDropContext
 				onDragStart={onDragStart}
 				onDragUpdate={onDragUpdate}
 				onDragEnd={onDragEnd}
 			>
 				<Draggables cards={cards} />
+				<InstructionsStyles>
+					<Text>
+						... and drop them here to make the logo great again!
+					</Text>
+				</InstructionsStyles>
 				<Droppables cards={cards} />
 			</DragDropContext>
 		</div>
