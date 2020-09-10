@@ -69,7 +69,7 @@ export const updateOnTarget = (result: any) => {
 	return (dispatch: any, getState: any) => {
 		return dispatch({
 			type: ACTIONS.GAME_UPDATE_TARGET,
-			payload: { target: nextState },
+			payload: { target: {} },
 		});
 	}
 }
