@@ -27,7 +27,8 @@ export const Home: FC<HomeProps> = () => {
 	return (
 		<BackgroundStyled>
 			<PageContentStyled>
-				{loged ? <Game /> : <Login onLogin={onLogin} />}
+				{/* {loged ? <Game /> : <Login onLogin={onLogin} />} */}
+				<Game />
 			</PageContentStyled>
 		</BackgroundStyled>
 	);
