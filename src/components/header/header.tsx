@@ -23,7 +23,7 @@ export const Header: FC<HeaderProps> = () => {
 	return (
 		<HeaderStyles>
 			<HeaderLeft>
-				<Title>Good luck, {userStore.name} here</Title>
+				<Title>Good luck, {userStore.name}</Title>
 			</HeaderLeft>
 			<HeaderRight>
 				<Score />

@@ -25,11 +25,7 @@ export const Droppables: FC<DroppablesProps> = () => {
 	return (
 		<CardsStyled>
 			{gameStore.target.map((c: any, index: number) => (
-				<Droppable
-					key={c.id}
-					droppableId={`droppable-target_${c.id}`}
-					direction="horizontal"
-				>
+				<Droppable key={c.id} droppableId={`droppable-target_${c.id}`}>
 					{(provided, snapshot) => (
 						<div ref={provided.innerRef}>
 							<Draggable
