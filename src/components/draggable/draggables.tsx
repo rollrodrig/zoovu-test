@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
 import { Card } from '../card/card';
 import { CardDrop } from '../card/card-drop';
+import { CardEmpty } from '../card/card-empty';
 const CardsStyled = styled.div`
 	display: flex;
 	justify-content: space-between;
@@ -23,10 +24,9 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 			{gameStore.origin.map((c: any, index: number) => (
 				<Droppable
 					key={c.id}
-					droppableId={`droppable-${c.id}`}
+					droppableId={`droppable-origin-${c.id}`}
 					direction="horizontal"
 					isDropDisabled={true}
-					ignoreContainerClipping={false}
 				>
 					{(provided, snapshot) => (
 						<div
@@ -34,7 +34,7 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 							style={ItemsStyle(snapshot.isDraggingOver)}
 						>
 							<Draggable
-								draggableId={`draggable-${c.id}`}
+								draggableId={`draggable-card-${c.id}`}
 								index={index}
 								isDragDisabled={c.img ? false : true}
 							>
@@ -51,7 +51,7 @@ export const Draggables: FC<DraggablesProps> = ({ cards }) => {
 										{c.img ? (
 											<Card img={c.img} />
 										) : (
-											<CardDrop key={c.id} />
+											<CardEmpty key={c.id} />
 										)}
 									</div>
 								)}

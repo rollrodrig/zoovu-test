@@ -30,7 +30,9 @@ export const Game: FC<GameProps> = () => {
 	};
 	const onDragEnd = (result: any) => {
 		console.log(result);
-		dispatch(updateTarget(result.source, result.destination));
+		if (result.destination) {
+			dispatch(updateTarget(result));
+		}
 	};
 	return (
 		<div>
