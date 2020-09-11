@@ -26,7 +26,7 @@ const ACTIONS = {
 	GAME_UPDATE_TARGET: 'GAME_UPDATE_TARGET',
 	GAME_RESET: 'GAME_RESET',
 };
-const verifyMatch = (result: any) => {
+export const verifyMatch = (result: any) => {
 	const cardId = result.draggableId.split('_')[1];
 	const destintyId = result.destination.droppableId.split('_')[1];
 	return cardId === destintyId;
